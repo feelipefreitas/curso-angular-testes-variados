@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'curso-angular-testes-variados';
+  showComponent = false;
+
+  renderComponent() {
+    this.showComponent = !this.showComponent;
+  }
 }
