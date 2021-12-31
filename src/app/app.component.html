@@ -5,3 +5,21 @@
     <app-component-to-render id="teste_karma-component-to-render" *ngIf="showComponent"></app-component-to-render>
   </div>
 </div>
+
+===========================================================
+
+<div>
+  <select
+    id="test_karma-select"
+    [ngModel]="currentStatusSelected"
+    (ngModelChange)="onStatusChanged($event)"
+  >
+    <option value="Ativo">Ativo</option>
+    <option value="Excluido">Excluido</option>
+  </select>
+
+  <h3 id="test_karma-current-status">Status Atual: {{ currentStatusSelected }}</h3>
+</div>
+
+===========================================================
+

@@ -1,8 +1,9 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ComponentToRenderComponent } from './component-to-render/component-to-render.component';
-import { ReturnBackgroundPipe } from './return-background.pipe';
+import { ReturnBackgroundPipe } from './pipes/return-background.pipe';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -15,12 +16,17 @@ describe('AppComponent', () => {
         ComponentToRenderComponent,
         ReturnBackgroundPipe
       ],
+      imports: [
+        FormsModule
+      ]
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+
+    fixture.detectChanges();
   });
 
   it('should create the app', () => {
@@ -86,4 +92,23 @@ describe('AppComponent', () => {
 
    expect(backgroundEl.nativeElement).not.toHaveClass(returnBackgroundPipe.transform(component.showComponent));
   });
+
+  describe('Select Tests', () => {
+    it('should select the status "Inativo"', () => {
+      const statusEl = fixture.debugElement.query(By.css('#test_karma-select')).nativeElement;
+
+      const selectedOption = statusEl.options[1].value;
+      
+      statusEl.value = selectedOption;
+      statusEl.dispatchEvent(new Event('change'));
+
+      fixture.detectChanges();
+      
+      const currentStatusEl = fixture.debugElement.query(By.css('#test_karma-current-status')).nativeElement;
+
+      expect(currentStatusEl.textContent).toBe('Status Atual: ' + selectedOption);
+    });
+  });
+
+  
 });
