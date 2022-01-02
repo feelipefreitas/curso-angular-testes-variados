@@ -110,5 +110,20 @@ describe('AppComponent', () => {
     });
   });
 
-  
+  describe('Input Tests', () => {
+    fit('should filter the people list', () => {
+      const inputFilter = fixture.debugElement.query(By.css('#test_karma-input-filter')).nativeElement;
+
+      inputFilter.value = 'Laura';
+      inputFilter.dispatchEvent(new Event('input'));
+
+      fixture.detectChanges();
+
+      const peopleList = fixture.debugElement.queryAll(By.css('#test_karma-people-list'));
+
+      expect(component.peopleListFiltered.length).toBe(1);
+      expect(component.peopleListFiltered[0].name).toBe('Laura');
+      expect(peopleList.length).toBe(1);
+    });
+  });
 });

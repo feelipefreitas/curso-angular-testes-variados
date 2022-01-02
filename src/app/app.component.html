@@ -23,3 +23,14 @@
 
 ===========================================================
 
+<div>
+  <input 
+    id="test_karma-input-filter"
+    [ngModel]="filterValue"
+    (ngModelChange)="onInputTextChange($event)"
+    placeholder="Faça um filtro"
+  />
+</div>
+<div id="test_karma-people-list" *ngFor="let person of peopleListFiltered">
+  Nome: {{ person.name }}
+</div>
